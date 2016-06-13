@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'org.liquibase.gradle'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework:spring-core:4.2.6.RELEASE',
+            'org.springframework:spring-beans:4.2.6.RELEASE',
+            'org.springframework:spring-context:4.2.6.RELEASE',
+            'org.springframework:spring-web:4.2.6.RELEASE',
+            'org.springframework:spring-tx:4.2.6.RELEASE',
+            'org.springframework:spring-jdbc:4.2.6.RELEASE',
+            'org.mybatis:mybatis-spring:1.2.5',
+            'org.mybatis:mybatis:3.3.1',
+            'org.apache.cxf:cxf-rt-transports-http:3.0.5',
+            'org.apache.cxf:cxf-rt-frontend-jaxws:3.0.5',
+            'org.apache.cxf:cxf-rt-frontend-jaxrs:3.0.5',
+            'xerces:xercesImpl:2.11.0',
+            'org.postgresql:postgresql:9.4.1208',
+            'log4j:log4j:1.2.17',
+            project('services:currency'),
+            project('services:weather')
+    testCompile 'junit:junit:4.12'
+}
+
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath 'gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1'
+    classpath 'org.postgresql:postgresql:9.4.1208'
+  }
+}
+
+liquibase {
+  activities {
+    main {
+      changeLogFile 'src/main/resources/liquibase/db.changelog-0.1.0.xml'
+      url 'jdbc:postgresql://localhost:5432/soapservice'
+      username 'postgres'
+      password '12345'
+    }
+  }
+}

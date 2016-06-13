@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.epam.khrapavitski.soapservice.dao.GisMeteoDAO'>
+
+    <insert id="create" parameterType="com.epam.khrapavitski.weather.HHForecast">
+        INSERT INTO
+        weather(id,date,temperature,humidity,windspeed,pressure)
+        VALUES((SELECT
+        nextval('weather_id_seq')),
+        #{time,javaType=javax.xml.datatype.XMLGregorianCalendar,jdbcType=TIMESTAMP,typeHandler=com.epam.khrapavitski.soapservice.util.DateTimeHandler},
+        #{t},#{humidity},#{ff},#{p})
+    </insert>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace="com.epam.khrapavitski.soapservice.dao.WeatherDAO">
+
+    <resultMap type="com.epam.khrapavitski.soapservice.pojo.Weather"
+        id="WeatherResult">
+        <id property="id" column="id" />
+        <result property="date" column="date" />
+        <result property="temperature" column="temperature" />
+        <result property="humidity" column="humidity" />
+        <result property="windSpeed" column="windspeed" />
+        <result property="pressure" column="pressure" />
+    </resultMap>
+
+    <insert id="create" parameterType="Weather">
+        <selectKey keyProperty="id" order="BEFORE" resultType="long">
+            SELECT nextval('weather_id_seq')
+        </selectKey>
+        INSERT INTO
+        weather(id,date,temperature,humidity,windspeed,pressure)
+        VALUES(#{id},#{date},#{temperature},#{humidity},#{windSpeed},#{pressure})
+    </insert>
+
+    <select id="readCurrentDay" resultMap="WeatherResult">
+        SELECT
+        date,temperature,humidity,windspeed,pressure
+        FROM
+        weather
+        WHERE date => now()::date
+    </select>
+    
+    <select id="getWeatherOnDay" resultMap="WeatherResult">
+        SELECT
+        date,temperature,humidity,windspeed,pressure
+        FROM
+        weather
+        WHERE date::date=#{date} LIMIT 1
+    </select>
+
+</mapper>

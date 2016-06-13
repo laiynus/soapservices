@@ -1,0 +1,16 @@
+/.gradle
+/.settings
+/.svn
+/bin
+/build
+*.classpath
+*.project
+/services/.settings
+/services/currency/.settings
+/services/currency/bin
+/services/currency/build
+/services/currency/src/main/java
+/services/weather/.settings
+/services/weather/bin
+/services/weather/build
+/services/weather/src/main/java

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.epam.khrapavitski.soapservice.dao.CurrencyDAO'>
+
+    <resultMap type="com.epam.khrapavitski.soapservice.pojo.Currency"
+        id="CurrencyResult">
+        <id property="id" column="id" />
+        <result property="date" column="date" />
+        <result property="name" column="name" />
+        <result property="scale" column="scale" />
+        <result property="officialRate" column="officialrate" />
+        <result property="abbreviation" column="abbreviation" />
+    </resultMap>
+
+    <insert id="create" parameterType="Currency">
+        <selectKey keyProperty="id" order="BEFORE" resultType="long">
+            SELECT nextval('currency_id_seq')
+        </selectKey>
+        INSERT INTO
+        currency(id,date,name,scale,officialrate,abbreviation)
+        VALUES(#{id},now()::date,#{name},#{scale},#{officialRate},#{abbreviation})
+    </insert>
+
+    <select id='readCurrentDay' resultMap='CurrencyResult'>
+        SELECT
+        date,name,scale,officialrate,abbreviation
+        FROM
+        currency
+        WHERE date = now()::date
+    </select>
+    
+    <select id='getByAbbreviation' resultMap='CurrencyResult'>
+        SELECT
+        date,name,scale,officialrate,abbreviation
+        FROM
+        currency
+        WHERE abbreviation=#{abbreviation} AND date = now()::date
+    </select>
+    
+     <select id='getExRatesByDay' resultMap='CurrencyResult'>
+        SELECT
+        date,name,scale,officialrate,abbreviation
+        FROM
+        currency
+        WHERE date::date=#{date}
+    </select>
+
+</mapper>
