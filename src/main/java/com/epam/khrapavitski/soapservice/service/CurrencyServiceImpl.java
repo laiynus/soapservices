@@ -39,4 +39,9 @@ public class CurrencyServiceImpl implements CurrencyService {
         return dao.getExRatesByDay(date);
     }
 
+    @Override
+    public Currency getExRatesByDayAndName(Date date, String abbreviation) {
+        return dao.getExRatesByDayAndName(date, abbreviation);
+    }
+
 }

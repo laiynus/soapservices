@@ -14,4 +14,6 @@ public interface CurrencyService {
     Currency getByAbbreviation(String abbreviation);
     
     List<Currency> getExRatesByDay(Date date);
+    
+    Currency getExRatesByDayAndName(Date date, String abbreviation);
 }

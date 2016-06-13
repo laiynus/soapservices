@@ -3,14 +3,15 @@ package com.epam.khrapavitski.soapservice.webservice;
 import java.util.Date;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.epam.khrapavitski.soapservice.pojo.Weather;
 
-@WebService
+@WebService(endpointInterface = "com.epam.khrapavitski.soapservice.webservice.WeatherSoapService", serviceName = "weather")
 public interface WeatherSoapService extends SoapWebService<Weather> {
 
-    @WebMethod
-    Weather getWeatherOnDay(Date date);
+    @WebMethod(operationName = "weatherOnDay")
+    Weather getWeatherOnDay(@WebParam(name = "date") Date date);
 
 }

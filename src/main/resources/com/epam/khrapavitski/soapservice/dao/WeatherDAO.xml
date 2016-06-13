@@ -28,7 +28,7 @@
         date,temperature,humidity,windspeed,pressure
         FROM
         weather
-        WHERE date => now()::date
+        WHERE date > now()::date
     </select>
     
     <select id="getWeatherOnDay" resultMap="WeatherResult">

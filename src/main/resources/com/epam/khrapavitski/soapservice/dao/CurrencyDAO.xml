@@ -46,5 +46,13 @@
         currency
         WHERE date::date=#{date}
     </select>
+    
+    <select id='getExRatesByDayAndName' resultMap='CurrencyResult'>
+        SELECT
+        date,name,scale,officialrate,abbreviation
+        FROM
+        currency
+        WHERE date::date=#{date} AND abbreviation=#{abbreviation}
+    </select>
 
 </mapper>
