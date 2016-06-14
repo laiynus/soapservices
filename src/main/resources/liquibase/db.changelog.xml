@@ -12,7 +12,8 @@
     </preConditions>
 
     <changeSet author="Raman Khrapavitski" id="0.1.1">
-
+        
+        <comment>Creating following tables:weather,currency</comment>
         <createTable tableName="weather" schemaName="${schema}">
             <column name="id" type="bigserial" autoIncrement="true">
                 <constraints primaryKey="true"
@@ -60,12 +61,14 @@
     </changeSet>
 
     <changeSet author="Raman Khrapavitski" id="0.1.2">
+        <comment>Adding following column dateadding to table weather</comment>
         <addColumn schemaName="${schema}" tableName="weather">
             <column name="dateadding" type="datetime" />
         </addColumn>
     </changeSet>
     
      <changeSet author="Raman Khrapavitski" id="0.1.3">
+        <comment>Adding following column timeperiod, cloundiness, precipitation, winddirection to table weather</comment>
         <addColumn schemaName="${schema}" tableName="weather">
             <column name="timeperiod" type="int" />
         </addColumn>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
-<mapper namespace='com.epam.khrapavitski.soapservice.dao.CurrencyDAO'>
+<mapper namespace="com.epam.khrapavitski.soapservice.dao.CurrencyDAO">
 
     <resultMap type="com.epam.khrapavitski.soapservice.pojo.Currency"
         id="CurrencyResult">
@@ -20,7 +20,7 @@
         </selectKey>
         INSERT INTO
         currency(id,date,name,scale,officialrate,abbreviation)
-        VALUES(#{id},now()::date,#{name},#{scale},#{officialRate},#{abbreviation})
+        VALUES(#{id},now(),#{name},#{scale},#{officialRate},#{abbreviation})
     </insert>
 
     <select id="readCurrentDay" resultMap="CurrencyResult">
