@@ -33,6 +33,15 @@ public class Weather implements Serializable {
     @XmlElement
     private Double pressure;
 
+    @XmlElement
+    private Integer cloudiness;
+
+    @XmlElement
+    private Double precipitation;
+
+    @XmlElement
+    private Double windDirection;
+
     public Weather() {
         super();
     }
@@ -91,6 +100,30 @@ public class Weather implements Serializable {
 
     public void setPressure(Double pressure) {
         this.pressure = pressure;
+    }
+
+    public Integer getCloudiness() {
+        return cloudiness;
+    }
+
+    public void setCloudiness(Integer cloudiness) {
+        this.cloudiness = cloudiness;
+    }
+
+    public Double getPrecipitation() {
+        return precipitation;
+    }
+
+    public void setPrecipitation(Double precipitation) {
+        this.precipitation = precipitation;
+    }
+
+    public Double getWindDirection() {
+        return windDirection;
+    }
+
+    public void setWindDirection(Double windDirection) {
+        this.windDirection = windDirection;
     }
 
     @Override

@@ -12,6 +12,9 @@ import com.epam.khrapavitski.soapservice.pojo.Weather;
 public interface WeatherSoapService extends SoapWebService<Weather> {
 
     @WebMethod(operationName = "weatherOnDay")
-    Weather getWeatherOnDay(@WebParam(name = "date") Date date);
+    Weather[] getWeatherOnDay(@WebParam(name = "date") Date date);
+    
+    @WebMethod(operationName = "weatherAverageOnDay")
+    Weather getAverageWeatherOnDay(@WebParam(name = "date") Date date);
 
 }

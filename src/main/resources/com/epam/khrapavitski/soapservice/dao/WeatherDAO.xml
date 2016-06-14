@@ -12,6 +12,9 @@
         <result property="humidity" column="humidity" />
         <result property="windSpeed" column="windspeed" />
         <result property="pressure" column="pressure" />
+        <result property="cloudiness" column="cloudiness"/>
+        <result property="precipitation" column="precipitation"/>
+        <result property="windDirection" column="winddirection"/>
     </resultMap>
 
     <insert id="create" parameterType="Weather">
@@ -25,7 +28,7 @@
 
     <select id="readCurrentDay" resultMap="WeatherResult">
         SELECT
-        date,temperature,humidity,windspeed,pressure
+        date,temperature,humidity,windspeed,pressure,cloudiness,precipitation,winddirection
         FROM
         weather
         WHERE date > now()::date
@@ -33,10 +36,18 @@
     
     <select id="getWeatherOnDay" resultMap="WeatherResult">
         SELECT
-        date,temperature,humidity,windspeed,pressure
+        date,temperature,humidity,windspeed,pressure,cloudiness,precipitation,winddirection
         FROM
         weather
-        WHERE date::date=#{date} LIMIT 1
+        WHERE date::date=#{date}
+    </select>
+    
+    <select id="getAverageWeatherOnDay" resultMap="WeatherResult">
+        SELECT
+        date,temperature,humidity,windspeed,pressure,cloudiness,precipitation,winddirection
+        FROM
+        weather
+        WHERE date::date=#{date} AND timeperiod=2
     </select>
 
 </mapper>

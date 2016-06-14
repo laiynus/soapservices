@@ -28,8 +28,13 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
-    public Weather getWeatherOnDay(Date date) {
+    public Weather[] getWeatherOnDay(Date date) {
         return dao.getWeatherOnDay(date);
+    }
+
+    @Override
+    public Weather getAverageWeatherOnDay(Date date) {
+        return dao.getAverageWeatherOnDay(date);
     }
 
 }

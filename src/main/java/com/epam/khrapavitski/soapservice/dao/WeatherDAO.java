@@ -9,6 +9,8 @@ public interface WeatherDAO extends DAO<Weather> {
 
     List<Weather> readCurrentDay();
 
-    Weather getWeatherOnDay(Date date);
+    Weather[] getWeatherOnDay(Date date);
+    
+    Weather getAverageWeatherOnDay(Date date);
 
 }

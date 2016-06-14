@@ -22,8 +22,13 @@ public class WeatherSoapServiceImpl implements WeatherSoapService {
     }
 
     @Override
-    public Weather getWeatherOnDay(Date date) {
+    public Weather[] getWeatherOnDay(Date date) {
         return service.getWeatherOnDay(date);
+    }
+
+    @Override
+    public Weather getAverageWeatherOnDay(Date date) {
+        return service.getAverageWeatherOnDay(date);
     }
 
 }

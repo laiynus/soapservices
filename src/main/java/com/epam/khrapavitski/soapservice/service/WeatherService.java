@@ -11,6 +11,8 @@ public interface WeatherService {
 
     List<Weather> readCurrentDay();
 
-    Weather getWeatherOnDay(Date date);
+    Weather[] getWeatherOnDay(Date date);
+    
+    Weather getAverageWeatherOnDay(Date date);
 
 }
