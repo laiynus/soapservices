@@ -17,7 +17,7 @@ public interface CurrencySoapService extends SoapWebService<Currency> {
     @WebMethod(operationName = "exchangeRatesByDay")
     Currency[] getExRatesByDay(@WebParam(name = "date") Date date);
 
-    @WebMethod(operationName = "currencyByNameAndName")
+    @WebMethod(operationName = "currencyByDateAndName")
     Currency getExrateByDayAndName(@WebParam(name = "date") Date date,
             @WebParam(name = "abbreviation") String abbreviation);
 
