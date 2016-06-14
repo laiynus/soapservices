@@ -16,8 +16,7 @@ public class DateTimeHandler implements TypeHandler<XMLGregorianCalendar> {
     @Override
     public void setParameter(PreparedStatement ps, int i, XMLGregorianCalendar parameter, JdbcType jdbcType)
             throws SQLException {
-        Timestamp date = new Timestamp(Util.toDate(parameter).getTime());
-        ps.setTimestamp(i, date);
+        ps.setTimestamp(i, new Timestamp(Util.toDate(parameter).getTime()));
     }
 
     @Override

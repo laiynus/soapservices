@@ -18,9 +18,7 @@ public class GisMeteoServiceImpl implements GisMeteoService {
 
     @Override
     public void save(List<HHForecast> weatherList) {
-        for (HHForecast weather : weatherList) {
-            dao.create(weather);
-        }
+        weatherList.forEach((HHForecast weather) -> dao.create(weather));
     }
     
     @Override

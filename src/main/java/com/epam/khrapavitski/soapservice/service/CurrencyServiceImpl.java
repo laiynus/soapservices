@@ -19,9 +19,7 @@ public class CurrencyServiceImpl implements CurrencyService {
 
     @Override
     public void save(List<Currency> currencyList) {
-        for (Currency currency : currencyList) {
-            dao.create(currency);
-        }
+        currencyList.forEach((Currency currency) -> dao.create(currency));
     }
 
     @Override

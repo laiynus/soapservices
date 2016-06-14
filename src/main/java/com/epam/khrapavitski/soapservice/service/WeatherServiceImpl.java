@@ -19,15 +19,12 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public void save(List<Weather> weatherList) {
-        for (Weather weather : weatherList) {
-            dao.create(weather);
-        }
+        weatherList.forEach((Weather weather) -> dao.create(weather));
     }
 
     @Override
     public List<Weather> readCurrentDay() {
-        List<Weather> list = dao.readCurrentDay();
-        return list;
+        return dao.readCurrentDay();
     }
 
     @Override

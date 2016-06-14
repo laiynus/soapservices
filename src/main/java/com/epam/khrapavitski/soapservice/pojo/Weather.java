@@ -3,16 +3,11 @@ package com.epam.khrapavitski.soapservice.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "Weather")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="Weather")
 public class Weather implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -93,6 +88,12 @@ public class Weather implements Serializable {
 
     public void setPressure(Double pressure) {
         this.pressure = pressure;
+    }
+
+    @Override
+    public String toString() {
+        return "Weather [id=" + id + ", date=" + date + ", temperature=" + temperature + ", humidity=" + humidity
+                + ", windSpeed=" + windSpeed + ", pressure=" + pressure + "]";
     }
 
 }
