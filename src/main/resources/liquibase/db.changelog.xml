@@ -11,7 +11,7 @@
         <dbms type="postgresql" />
     </preConditions>
 
-    <changeSet author="Raman Khrapavitski" id="0.1.0">
+    <changeSet author="Raman Khrapavitski" id="0.1.1">
 
         <createTable tableName="weather" schemaName="${schema}">
             <column name="id" type="bigserial" autoIncrement="true">
@@ -57,6 +57,12 @@
             </column>
         </createTable>
 
+    </changeSet>
+
+    <changeSet author="Raman Khrapavitski" id="0.1.2">
+        <addColumn schemaName="${schema}" tableName="weather">
+            <column name="dateadding" type="datetime" />
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>

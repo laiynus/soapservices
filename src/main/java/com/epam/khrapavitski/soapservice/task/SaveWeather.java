@@ -30,6 +30,7 @@ public class SaveWeather implements Task {
     public void execute() {
         WeatherSoap soap = new Weather().getWeatherSoap();
         HHForecastResult result = soap.getHHForecast(serial, city);
+        service.deleteExpareInfo();
         service.save(result.getData().getHHForecast());
     }
 

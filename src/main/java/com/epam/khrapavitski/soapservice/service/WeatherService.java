@@ -6,10 +6,11 @@ import java.util.List;
 import com.epam.khrapavitski.soapservice.pojo.Weather;
 
 public interface WeatherService {
-    
+
     void save(List<Weather> weatherList);
 
     List<Weather> readCurrentDay();
-    
+
     Weather getWeatherOnDay(Date date);
+
 }

@@ -22,5 +22,10 @@ public class GisMeteoServiceImpl implements GisMeteoService {
             dao.create(weather);
         }
     }
+    
+    @Override
+    public void deleteExpareInfo() {
+        dao.deleteExpareInfo();
+    }
 
 }

@@ -16,12 +16,12 @@ public class Sheduler {
     @Qualifier("saveCurrency")
     Task saveCurrency;
 
-    @Scheduled(cron = "0 0 9 * * ?")
+    @Scheduled(cron = "0 0 10 * * ?")
     public void saveWeather() {
         saveWeather.execute();
     }
 
-    @Scheduled(cron = "0 0 9 * * ?")
+    @Scheduled(cron = "0 0 10 * * ?")
     public void saveCurrency() {
         saveCurrency.execute();
     }

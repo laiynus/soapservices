@@ -42,7 +42,7 @@ buildscript {
 liquibase {
   activities {
     main {
-      changeLogFile 'src/main/resources/liquibase/db.changelog-0.1.0.xml'
+      changeLogFile 'src/main/resources/liquibase/db.changelog.xml'
       url 'jdbc:postgresql://localhost:5432/soapservice'
       username 'postgres'
       password '12345'

@@ -6,11 +6,16 @@
 
     <insert id="create" parameterType="com.epam.khrapavitski.weather.HHForecast">
         INSERT INTO
-        weather(id,date,temperature,humidity,windspeed,pressure)
+        weather(id,date,temperature,humidity,windspeed,pressure,dateadding)
         VALUES((SELECT
         nextval('weather_id_seq')),
         #{time,javaType=javax.xml.datatype.XMLGregorianCalendar,jdbcType=TIMESTAMP,typeHandler=com.epam.khrapavitski.soapservice.util.DateTimeHandler},
-        #{t},#{humidity},#{ff},#{p})
+        #{t},#{humidity},#{ff},#{p},now()::date)
     </insert>
+    
+    <delete id="deleteExpareInfo">
+        DELETE FROM weather
+        WHERE dateadding::date=now()::date-1
+    </delete>
 
 </mapper>

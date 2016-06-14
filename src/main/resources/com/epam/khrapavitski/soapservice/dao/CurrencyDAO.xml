@@ -23,7 +23,7 @@
         VALUES(#{id},now()::date,#{name},#{scale},#{officialRate},#{abbreviation})
     </insert>
 
-    <select id='readCurrentDay' resultMap='CurrencyResult'>
+    <select id="readCurrentDay" resultMap="CurrencyResult">
         SELECT
         date,name,scale,officialrate,abbreviation
         FROM
@@ -31,7 +31,7 @@
         WHERE date = now()::date
     </select>
     
-    <select id='getByAbbreviation' resultMap='CurrencyResult'>
+    <select id="getByAbbreviation" resultMap="CurrencyResult">
         SELECT
         date,name,scale,officialrate,abbreviation
         FROM
@@ -39,7 +39,7 @@
         WHERE abbreviation=#{abbreviation} AND date = now()::date
     </select>
     
-     <select id='getExRatesByDay' resultMap='CurrencyResult'>
+     <select id="getExRatesByDay" resultMap="CurrencyResult">
         SELECT
         date,name,scale,officialrate,abbreviation
         FROM
@@ -47,7 +47,7 @@
         WHERE date::date=#{date}
     </select>
     
-    <select id='getExRatesByDayAndName' resultMap='CurrencyResult'>
+    <select id="getExRatesByDayAndName" resultMap="CurrencyResult">
         SELECT
         date,name,scale,officialrate,abbreviation
         FROM
