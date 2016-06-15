@@ -42,10 +42,20 @@ buildscript {
 liquibase {
   activities {
     main {
-      changeLogFile 'src/main/resources/liquibase/db.changelog.xml'
-      url 'jdbc:postgresql://localhost:5432/soapservice'
-      username 'postgres'
-      password '12345'
+      changeLogFile "$changeLogFile"
+      url "$url"
+      username "$username"
+      password "$password"
     }
   }
+}
+
+task sortProperties << {
+    File propertiesFile = new File("$projectDir/gradle.properties")
+    def props = new Properties()
+    props.load(propertiesFile.newDataInputStream())
+    println props.getClass()
+    props = props.sort {a, b -> a.key <=> b.key}
+   
+    props.each{k, v -> println "${k}:${v} " + v.getClass()}
 }
