@@ -28,7 +28,7 @@
         date,name,scale,officialrate,abbreviation
         FROM
         currency
-        WHERE date = now()::date
+        WHERE date::date = now()::date
     </select>
     
     <select id="getByAbbreviation" resultMap="CurrencyResult">
@@ -36,7 +36,7 @@
         date,name,scale,officialrate,abbreviation
         FROM
         currency
-        WHERE abbreviation=#{abbreviation} AND date = now()::date
+        WHERE abbreviation=#{abbreviation} AND date::date = now()::date
     </select>
     
      <select id="getExRatesByDay" resultMap="CurrencyResult">
