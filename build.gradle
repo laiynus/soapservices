@@ -42,10 +42,10 @@ buildscript {
 liquibase {
   activities {
     main {
-      changeLogFile "$changeLogFile"
-      url "$url"
-      username "$username"
-      password "$password"
+      changeLogFile project.ext.properties['db.changeLogFile']
+      url project.ext.properties['db.url']
+      username project.ext.properties['db.username']
+      password project.ext.properties['db.password']
     }
   }
 }
@@ -54,8 +54,15 @@ task sortProperties << {
     File propertiesFile = new File("$projectDir/gradle.properties")
     def props = new Properties()
     props.load(propertiesFile.newDataInputStream())
-    println props.getClass()
-    props = props.sort {a, b -> a.key <=> b.key}
-   
-    props.each{k, v -> println "${k}:${v} " + v.getClass()}
+    if(!project.hasProperty("direction")){
+       props = props.sort{a,b -> a.getKey() <=> b.getKey()}
+    }else{
+        if("$direction"=="desc"){
+            props = props.sort{a,b -> b.getKey() <=> a.getKey()}
+        }else{
+            props = props.sort{a,b -> a.getKey() <=> b.getKey()}
+        }
+    }
+    props.each{k, v -> println "${k}:${v}"}
+    propertiesFile.withWriter{ out -> props.each {out.println it} }
 }
