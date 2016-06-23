@@ -53,13 +53,22 @@ buildscript {
 
 liquibase {
   activities {
-    main {
-      changeLogFile project.ext.properties['db.changeLogFile']
+    test {
+      changeLogFile project.ext.properties['liquibase.changeLogFile.test']
       url project.ext.properties['db.url']
       username project.ext.properties['db.username']
       password project.ext.properties['db.password']
+      liquibaseSchemaName project.ext.properties['liquibase.schemaNameTest']
+    }
+    production {
+      changeLogFile project.ext.properties['liquibase.changeLogFile.production']
+      url project.ext.properties['db.url']
+      username project.ext.properties['db.username']
+      password project.ext.properties['db.password']
+      liquibaseSchemaName project.ext.properties['liquibase.schemaNameProduction']
     }
   }
+  runList = project.ext.properties['liquibase.activity']
 }
 
 tomcat {
