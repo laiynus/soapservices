@@ -4,7 +4,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.liquibase.gradle'
 apply plugin: 'com.bmuschko.tomcat'
 
-build.dependsOn update,tomcatRun
+build.dependsOn(tomcatRun.dependsOn(update))
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.12'
