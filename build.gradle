@@ -2,6 +2,13 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'org.liquibase.gradle'
+apply plugin: 'com.bmuschko.tomcat'
+
+build.dependsOn update,tomcatRun
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.12'
+}
 
 repositories {
     mavenCentral()
@@ -25,6 +32,10 @@ dependencies {
             project('services:currency'),
             project('services:weather')
     testCompile 'junit:junit:4.12'
+    def tomcatVersion = project.ext.properties['tomcat.version']
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
 
 buildscript {
@@ -36,6 +47,7 @@ buildscript {
   dependencies {
     classpath 'gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1'
     classpath 'org.postgresql:postgresql:9.4.1208'
+    classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
   }
 }
 
@@ -48,6 +60,20 @@ liquibase {
       password project.ext.properties['db.password']
     }
   }
+}
+
+tomcat {
+    httpPort = 8080
+    httpsPort = 8043
+    enableSSL = false
+    contextPath = 'soap'
+    users {
+        user {
+            username = 'admin'
+            password = 'admin'
+            roles = ['manager']
+        }
+    }
 }
 
 task sortProperties << {
