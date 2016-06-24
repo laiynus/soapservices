@@ -3,16 +3,11 @@ apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'org.liquibase.gradle'
 apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'com.epam.khrapavitski.util'
 
-build.dependsOn(tomcatRun.dependsOn(update))
+task wrapper(type: Wrapper) { gradleVersion = '2.13' }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.13'
-}
-
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
     compile 'org.springframework:spring-core:4.2.6.RELEASE',
@@ -39,36 +34,36 @@ dependencies {
 }
 
 buildscript {
-  repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
+    repositories {
+        maven {url "https://plugins.gradle.org/m2/"}
+        maven {url uri('../repo')}
     }
-  }
-  dependencies {
-    classpath 'gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1'
-    classpath 'org.postgresql:postgresql:9.4.1208'
-    classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
-  }
+    dependencies {
+        classpath 'gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1'
+        classpath 'org.postgresql:postgresql:9.4.1208'
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+        classpath 'com.epam.khrapavitski:gradle-project-util:0.0.1'
+    }
 }
 
 liquibase {
-  activities {
-    test {
-      changeLogFile project.ext.properties['liquibase.changeLogFile.test']
-      url project.ext.properties['db.url']
-      username project.ext.properties['db.username']
-      password project.ext.properties['db.password']
-      liquibaseSchemaName project.ext.properties['liquibase.schemaNameTest']
+    activities {
+        test {
+            changeLogFile project.ext.properties['liquibase.changeLogFile.test']
+            url project.ext.properties['db.url']
+            username project.ext.properties['db.username']
+            password project.ext.properties['db.password']
+            liquibaseSchemaName project.ext.properties['liquibase.schemaNameTest']
+        }
+        production {
+            changeLogFile project.ext.properties['liquibase.changeLogFile.production']
+            url project.ext.properties['db.url']
+            username project.ext.properties['db.username']
+            password project.ext.properties['db.password']
+            liquibaseSchemaName project.ext.properties['liquibase.schemaNameProduction']
+        }
     }
-    production {
-      changeLogFile project.ext.properties['liquibase.changeLogFile.production']
-      url project.ext.properties['db.url']
-      username project.ext.properties['db.username']
-      password project.ext.properties['db.password']
-      liquibaseSchemaName project.ext.properties['liquibase.schemaNameProduction']
-    }
-  }
-  runList = project.ext.properties['liquibase.activity']
+    runList = project.ext.properties['liquibase.activity']
 }
 
 tomcat {
@@ -85,19 +80,14 @@ tomcat {
     }
 }
 
-task sortProperties << {
-    File propertiesFile = new File("$projectDir/gradle.properties")
-    def props = new Properties()
-    props.load(propertiesFile.newDataInputStream())
-    if(!project.hasProperty("direction")){
-       props = props.sort{a,b -> a.getKey() <=> b.getKey()}
-    }else{
-        if("$direction"=="desc"){
-            props = props.sort{a,b -> b.getKey() <=> a.getKey()}
-        }else{
-            props = props.sort{a,b -> a.getKey() <=> b.getKey()}
-        }
-    }
-    props.each{k, v -> println "${k}:${v}"}
-    propertiesFile.withWriter{ out -> props.each {out.println it} }
+build{
+    dependsOn tomcatRun
+}
+
+tomcatRun{
+    dependsOn update
+}
+
+update{
+    dependsOn sortProperties
 }

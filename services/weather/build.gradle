@@ -7,27 +7,23 @@ buildscript{
         jcenter()
         mavenCentral()
     }
-    dependencies {
-        classpath 'no.nils:wsdl2java:0.10'
-    }
+    dependencies { classpath 'no.nils:wsdl2java:0.10' }
 }
 
-repositories{
-    mavenCentral()
-}
+repositories{ mavenCentral() }
 
-dependencies(){
-    testCompile 'junit:junit:+'
-}
+dependencies(){ testCompile 'junit:junit:+' }
 
 wsdl2java{
     wsdlsToGenerate = [
-            ['-p','com.epam.khrapavitski.weather', '-autoNameResolution',"$projectDir/src/main/resources/Weather.asmx.wsdl"]
+        [
+            '-p',
+            'com.epam.khrapavitski.weather',
+            '-autoNameResolution',
+            "$projectDir/src/main/resources/Weather.asmx.wsdl"]
     ]
     generatedWsdlDir = file("$projectDir/src/main/java/")
     wsdlDir = file("$projectDir/src/main/resources/")
 }
 
-wsdl2javaExt {
-    cxfVersion = "2.5.1"
-}
+wsdl2javaExt { cxfVersion = "2.5.1" }
