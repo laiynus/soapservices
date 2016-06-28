@@ -5,22 +5,22 @@ apply plugin: 'org.liquibase.gradle'
 apply plugin: 'com.bmuschko.tomcat'
 apply plugin: 'com.epam.khrapavitski.util'
 
-task wrapper(type: Wrapper) { gradleVersion = '2.13' }
+task wrapper(type: Wrapper) { gradleVersion = '2.14' }
 
 repositories { mavenCentral() }
 
 dependencies {
-    compile 'org.springframework:spring-core:4.2.6.RELEASE',
-            'org.springframework:spring-beans:4.2.6.RELEASE',
-            'org.springframework:spring-context:4.2.6.RELEASE',
-            'org.springframework:spring-web:4.2.6.RELEASE',
-            'org.springframework:spring-tx:4.2.6.RELEASE',
-            'org.springframework:spring-jdbc:4.2.6.RELEASE',
-            'org.mybatis:mybatis-spring:1.2.5',
-            'org.mybatis:mybatis:3.3.1',
-            'org.apache.cxf:cxf-rt-transports-http:3.0.5',
-            'org.apache.cxf:cxf-rt-frontend-jaxws:3.0.5',
-            'org.apache.cxf:cxf-rt-frontend-jaxrs:3.0.5',
+    compile 'org.springframework:spring-core:4.3.0.RELEASE',
+            'org.springframework:spring-beans:4.3.0.RELEASE',
+            'org.springframework:spring-context:4.3.0.RELEASE',
+            'org.springframework:spring-web:4.3.0.RELEASE',
+            'org.springframework:spring-tx:4.3.0.RELEASE',
+            'org.springframework:spring-jdbc:4.3.0.RELEASE',
+            'org.mybatis:mybatis-spring:1.3.0',
+            'org.mybatis:mybatis:3.4.0',
+            'org.apache.cxf:cxf-rt-transports-http:3.1.6',
+            'org.apache.cxf:cxf-rt-frontend-jaxws:3.1.6',
+            'org.apache.cxf:cxf-rt-frontend-jaxrs:3.1.6',
             'xerces:xercesImpl:2.11.0',
             'org.postgresql:postgresql:9.4.1208',
             'log4j:log4j:1.2.17',
@@ -66,6 +66,16 @@ liquibase {
     runList = project.ext.properties['liquibase.activity']
 }
 
+gradleUtil {
+    wsdls {
+        wsdl {
+            url = project.ext.properties['gradle-project-util.wsdlUrl.weather']
+            fileName = project.ext.properties['gradle-project-util.wsdlName.weather']
+            serviceName = project.ext.properties['gradle-project-util.serviceName']
+        }
+    }
+}
+
 tomcat {
     httpPort = 8080
     httpsPort = 8043
@@ -85,3 +95,5 @@ build{ dependsOn tomcatRun }
 tomcatRun{ dependsOn update }
 
 update{ dependsOn sortProperties }
+
+clean{ dependsOn cleanServices}
