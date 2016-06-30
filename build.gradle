@@ -7,8 +7,6 @@ buildscript {
     repositories {
         maven {url "https://plugins.gradle.org/m2/"}
         maven {url uri('../repo')}
-        jcenter()
-        mavenCentral()
     }
     dependencies {
         classpath 'gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1'
@@ -111,3 +109,5 @@ tomcatRun{ dependsOn update }
 update{ dependsOn sortProperties }
 
 clean{ dependsOn cleanServices}
+
+compileJava{dependsOn wsdl2Java}
