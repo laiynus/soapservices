@@ -3,11 +3,14 @@ package com.epam.khrapavitski.soapservice.webservice;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.WebService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.epam.khrapavitski.soapservice.pojo.Weather;
 import com.epam.khrapavitski.soapservice.service.WeatherService;
 
+@WebService(endpointInterface = "com.epam.khrapavitski.soapservice.webservice.WeatherSoapService", serviceName = "weather", portName = "WeatherSoapService")
 public class WeatherSoapServiceImpl implements WeatherSoapService {
 
     @Autowired

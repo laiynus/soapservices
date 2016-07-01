@@ -3,6 +3,7 @@
 /.svn
 /bin
 /build
+/wsdls
 *.classpath
 *.project
 /services/.settings

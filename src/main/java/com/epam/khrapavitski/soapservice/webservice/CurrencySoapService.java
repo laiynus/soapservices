@@ -8,7 +8,7 @@ import javax.jws.WebService;
 
 import com.epam.khrapavitski.soapservice.pojo.Currency;
 
-@WebService(endpointInterface = "com.epam.khrapavitski.soapservice.webservice.CurrencySoapService", serviceName = "currency")
+@WebService
 public interface CurrencySoapService extends SoapWebService<Currency> {
 
     @WebMethod(operationName = "currencyByNameToday")

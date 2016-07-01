@@ -43,6 +43,18 @@ gradleUtil {
             serviceName = project.ext.properties['gradle-project-util.serviceName.currency']
         }
     }
+    javaClasses{
+        javaClass{
+            classDir = "${project.buildDir}/classes/main/"
+            className = project.ext.properties['gradle-project-util.webservice.className.currency']
+            wsdlName = project.ext.properties['gradle-project-util.webservice.wsdlName.currency']
+        }
+        javaClass{
+            classDir = "${project.buildDir}/classes/main/"
+            className = project.ext.properties['gradle-project-util.webservice.className.weather']
+            wsdlName = project.ext.properties['gradle-project-util.webservice.wsdlName.weather']
+        }
+    }
 }
 
 dependencies {
@@ -107,6 +119,8 @@ build{ dependsOn tomcatRun }
 tomcatRun{ dependsOn update }
 
 update{ dependsOn sortProperties }
+
+sortProperties{dependsOn java2WSDL}
 
 clean{ dependsOn cleanServices}
 

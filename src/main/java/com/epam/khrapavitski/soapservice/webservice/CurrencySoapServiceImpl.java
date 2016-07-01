@@ -3,11 +3,14 @@ package com.epam.khrapavitski.soapservice.webservice;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.WebService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.epam.khrapavitski.soapservice.pojo.Currency;
 import com.epam.khrapavitski.soapservice.service.CurrencyService;
 
+@WebService(endpointInterface = "com.epam.khrapavitski.soapservice.webservice.CurrencySoapService", serviceName = "currency",portName = "CurrencySoapService")
 public class CurrencySoapServiceImpl implements CurrencySoapService {
 
     @Autowired

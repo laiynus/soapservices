@@ -8,7 +8,7 @@ import javax.jws.WebService;
 
 import com.epam.khrapavitski.soapservice.pojo.Weather;
 
-@WebService(endpointInterface = "com.epam.khrapavitski.soapservice.webservice.WeatherSoapService", serviceName = "weather")
+@WebService
 public interface WeatherSoapService extends SoapWebService<Weather> {
 
     @WebMethod(operationName = "weatherOnDay")
